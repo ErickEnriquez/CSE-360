@@ -2,8 +2,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class InputFrame {
 
@@ -80,6 +83,12 @@ public class InputFrame {
 		frame.getContentPane().add(restartButton);
 		
 		JButton quitButton = new JButton("Quit");
+		quitButton.addActionListener(new ActionListener() {
+			/*If the user clicks the quit button end the program*/
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);
+			}
+		});
 		quitButton.setBounds(368, 270, 186, 65);
 		frame.getContentPane().add(quitButton);
 		
@@ -92,7 +101,32 @@ public class InputFrame {
 		frame.getContentPane().add(aboutButton);
 		
 		JButton enterButton = new JButton("Enter");
+		enterButton.addActionListener(new ActionListener() {
+			/*once the user has entered the data in the provided fields. retrieve it and clear the fields*/
+			public void actionPerformed(ActionEvent e) {
+				String activity = ActivityField.getText();
+				String duration = DurationField.getText();
+				// not sure how to do dependencies
+				if(isNumeric(duration) == false) {
+					JOptionPane.showMessageDialog(null, "Please Enter an Integer");
+				}
+				//clear the textFields
+				ActivityField.setText(null);
+				DurationField.setText(null);
+				DependenciesField.setText(null);
+			}
+		});
 		enterButton.setBounds(40, 354, 175, 57);
 		frame.getContentPane().add(enterButton);
+	}
+	/**Trys to convert string to numerical value. returns false is string is not a number , returns true otherwise*/
+	private boolean isNumeric(String str) {
+		try {
+			int i  = Integer.parseInt(str);
+		}
+		catch(NumberFormatException nfe) {
+			return false;
+		}
+		return true;
 	}
 }
