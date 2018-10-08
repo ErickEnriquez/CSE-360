@@ -125,9 +125,7 @@ public class InputFrame {
 		});
 		enterButton.setBounds(40, 354, 175, 57);
 		frame.getContentPane().add(enterButton);
-		/* change *
-		 * 
-		 */
+		
 	}
 	/**Trys to convert string to numerical value. returns false is string is not a number , returns true otherwise*/
 	private boolean isNumeric(String str) {
