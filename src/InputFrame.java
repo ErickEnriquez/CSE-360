@@ -99,7 +99,7 @@ public class InputFrame {
 		JButton aboutButton = new JButton("About");
 		aboutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null, "Project for 360 written by Erick , Jai, and Michael it's a network diagram");
+				JOptionPane.showMessageDialog(null, "Project for 360 written by Erick , Jai, and Michael.\n it's a network diagram GUI that gives the critical path");
 			}
 		});
 		aboutButton.setBounds(562, 400, 97, 25);
@@ -111,6 +111,8 @@ public class InputFrame {
 			public void actionPerformed(ActionEvent e) {
 				String activity = ActivityField.getText();
 				String duration = DurationField.getText();
+				String depend = DependenciesField.getText();
+				String[] result = depend.trim().split(" ");
 				// not sure how to do dependencies
 				if(isNumeric(duration) == false) {
 					JOptionPane.showMessageDialog(null, "Please Enter an Integer");
