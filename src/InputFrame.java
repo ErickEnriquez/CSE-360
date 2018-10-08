@@ -78,8 +78,8 @@ public class InputFrame {
 		proccessButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//one the user enters in all of the data we will open the output frame and display results here
-				OutputFrame out = new OutputFrame();//make an object of type OutputFrame()
-				out.newScreen();//open a new the output window
+				//OutputFrame out = new OutputFrame();//make an object of type OutputFrame()
+				//out.newScreen();//open a new the output window
 			}
 		});
 		proccessButton.setBounds(368, 47, 186, 65);
@@ -132,6 +132,7 @@ public class InputFrame {
 		});
 		enterButton.setBounds(40, 354, 175, 57);
 		frame.getContentPane().add(enterButton);
+		
 	}
 	/**Trys to convert string to numerical value. returns false is string is not a number , returns true otherwise*/
 	private boolean isNumeric(String str) {
