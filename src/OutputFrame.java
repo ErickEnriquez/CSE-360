@@ -2,6 +2,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import javax.swing.JLabel;
 
 public class OutputFrame {
 
@@ -11,7 +12,7 @@ public class OutputFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void newScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -44,5 +45,9 @@ public class OutputFrame {
 		textField.setBounds(12, 24, 408, 216);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
+		
+		JLabel criticalPathLabel = new JLabel("critical path");
+		criticalPathLabel.setBounds(149, 0, 109, 16);
+		frame.getContentPane().add(criticalPathLabel);
 	}
 }
