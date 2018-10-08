@@ -1,10 +1,12 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JTextField;
 
 public class OutputFrame {
 
 	private JFrame frame;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -37,5 +39,10 @@ public class OutputFrame {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+		textField = new JTextField();
+		textField.setBounds(12, 24, 408, 216);
+		frame.getContentPane().add(textField);
+		textField.setColumns(10);
 	}
 }
