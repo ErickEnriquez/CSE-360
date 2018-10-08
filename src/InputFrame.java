@@ -97,6 +97,11 @@ public class InputFrame {
 		frame.getContentPane().add(helpButton);
 		
 		JButton aboutButton = new JButton("About");
+		aboutButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null, "Project for 360 written by Erick , Jai, and Michael it's a network diagram");
+			}
+		});
 		aboutButton.setBounds(562, 400, 97, 25);
 		frame.getContentPane().add(aboutButton);
 		
