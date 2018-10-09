@@ -75,6 +75,13 @@ public class InputFrame {
 		DependenciesField.setColumns(10);
 		
 		JButton proccessButton = new JButton("Proccess");
+		proccessButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//one the user enters in all of the data we will open the output frame and display results here
+				//OutputFrame out = new OutputFrame();//make an object of type OutputFrame()
+				//out.newScreen();//open a new the output window
+			}
+		});
 		proccessButton.setBounds(368, 47, 186, 65);
 		frame.getContentPane().add(proccessButton);
 		
@@ -112,7 +119,7 @@ public class InputFrame {
 				String activity = ActivityField.getText();
 				String duration = DurationField.getText();
 				String depend = DependenciesField.getText();
-				String[] result = depend.trim().split(" ");
+				String[] result = depend.trim().split(" ");//trims the string down and will store it in an array
 				// not sure how to do dependencies
 				if(isNumeric(duration) == false) {
 					JOptionPane.showMessageDialog(null, "Please Enter an Integer");
@@ -125,6 +132,7 @@ public class InputFrame {
 		});
 		enterButton.setBounds(40, 354, 175, 57);
 		frame.getContentPane().add(enterButton);
+		
 	}
 	/**Trys to convert string to numerical value. returns false is string is not a number , returns true otherwise*/
 	private boolean isNumeric(String str) {
