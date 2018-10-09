@@ -130,8 +130,8 @@ public class InputFrame {
 		enterButton.addActionListener(new ActionListener() {
 			/*once the user has entered the data in the provided fields. retrieve it and clear the fields*/
 			public void actionPerformed(ActionEvent e) {
-				activityLabel.setForeground(Color.BLACK);
-				durationLabel.setForeground(Color.BLACK);
+				activityLabel.setForeground(Color.BLACK);//reset the text if it was changed
+				durationLabel.setForeground(Color.BLACK);//reset the label color if it was changed
 				String activity = ActivityField.getText();
 				String duration = DurationField.getText();
 				String depend = DependenciesField.getText();
