@@ -103,12 +103,13 @@ public class InputFrame {
 		helpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//if the user hit the help button open a dialog box that helps with some of the common functions of the program
-				JOptionPane.showMessageDialog(null, "Using of the program\n Q: I want to add a node to the network\n A : To enter "
+				JOptionPane.showMessageDialog(null, "Using of the program\n Q : I want to add a node to the network\n A : To enter "
 						+ "a Node please enter the the nodes name in the activity name field\n enter the duration into the duration field."
 						+ "plese note duration must be an integer, and add any dependencies of the\n node as a space separated list\n\nQ : How do I"
-						+ " quit the program?\nA :  To quit the program simply hit the Quit button\nQ : How can I restart the Network?\n A :  "
+						+ " quit the program?\nA :  To quit the program simply hit the Quit button\n\nQ : How can I restart the Network?\n A :  "
 						+ "To restart the network just hit the reset network."
-						+ " it will clear the network so that you can start from scratch" 
+						+ " it will clear the network so that you can start from scratch\n\n"
+						+ "Q : can I enter more than 1 activity at a time?\nA : No you can only enter 1 activity at a time" 
 			);
 			}
 		});
