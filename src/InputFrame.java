@@ -78,8 +78,8 @@ public class InputFrame {
 		proccessButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//one the user enters in all of the data we will open the output frame and display results here
-				OutputFrame o = new OutputFrame();//make a new branch 
-				o.newScreen();// open a new frame 
+				OutputFrame o = new OutputFrame();//make a new object of type outputFrame 
+				o.newScreen();// open a new frame by calling it's initialize button
 			}
 		});
 		proccessButton.setBounds(368, 47, 186, 65);
@@ -100,6 +100,18 @@ public class InputFrame {
 		frame.getContentPane().add(quitButton);
 		
 		JButton helpButton = new JButton("Help");
+		helpButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//if the user hit the help button open a dialog box that helps with some of the common functions of the program
+				JOptionPane.showMessageDialog(null, "Using of the program\n Q: I want to add a node to the network\n A : To enter "
+						+ "a Node please enter the the nodes name in the activity name field\n enter the duration into the duration field."
+						+ "plese note duration must be an integer, and add any dependencies of the\n node as a space separated list\n\nQ : How do I"
+						+ " quit the program?\nA :  To quit the program simply hit the Quit button\nQ : How can I restart the Network?\n A :  "
+						+ "To restart the network just hit the reset network."
+						+ " it will clear the network so that you can start from scratch" 
+			);
+			}
+		});
 		helpButton.setBounds(457, 400, 97, 25);
 		frame.getContentPane().add(helpButton);
 		

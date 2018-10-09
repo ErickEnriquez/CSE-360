@@ -12,7 +12,7 @@ public class OutputFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void newScreen() {
+	public void newScreen() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
