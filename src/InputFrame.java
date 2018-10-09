@@ -105,12 +105,14 @@ public class InputFrame {
 			public void actionPerformed(ActionEvent e) {
 				//if the user hit the help button open a dialog box that helps with some of the common functions of the program
 				JOptionPane.showMessageDialog(null, "Using of the program\n\n Q : How do I add an activity into the network?\n A : To enter "
-						+ "a Node please enter the the nodes name in the activity name field\n enter the duration into the duration field."
-						+ "plese note duration must be an integer, and add any dependencies of the\n node as a space separated list\n\nQ : How do I"
+						+ "an activity please enter the the activity's name in the activity name field,\n enter the duration into the duration field,"
+						+ "(please note duration must be an integer), and add any dependencies of the\n node as a space separated list,then click enter and "
+						+ " it will add the activity into the network\n\nQ : How do I"
 						+ " quit the program?\nA :  To quit the program simply hit the Quit button\n\nQ : How can I restart the Network?\n A :  "
 						+ "To restart the network just hit the reset network."
 						+ " it will clear the network so that you can start from scratch\n\n"
-						+ "Q : Can I enter more than 1 activity at a time?\nA : No you can only enter 1 activity at a time" 
+						+ "Q : Can I enter more than 1 activity at a time?\nA : No you can only enter 1 activity at a time"
+						+"\n\nQ : What does the proccess button do?\nA : The process button takes the network created and outputs the critical path in a new tab"
 			);
 			}
 		});
