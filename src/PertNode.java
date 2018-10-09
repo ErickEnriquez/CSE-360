@@ -48,7 +48,7 @@ public class PertNode extends PertList
 	{
 		for(int i = 0; i < this.stringDependencies.length; i++)
 		{
-			if(this.stringDependencies[i] == )
+		//	if(this.stringDependencies[i] == )
 		}
 		return false;
 	}

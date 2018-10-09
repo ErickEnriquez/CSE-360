@@ -78,8 +78,8 @@ public class InputFrame {
 		proccessButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//one the user enters in all of the data we will open the output frame and display results here
-				//OutputFrame out = new OutputFrame();//make an object of type OutputFrame()
-				//out.newScreen();//open a new the output window
+				OutputFrame o = new OutputFrame();//make a new branch 
+				o.newScreen();// open a new frame 
 			}
 		});
 		proccessButton.setBounds(368, 47, 186, 65);
