@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -103,13 +104,13 @@ public class InputFrame {
 		helpButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//if the user hit the help button open a dialog box that helps with some of the common functions of the program
-				JOptionPane.showMessageDialog(null, "Using of the program\n Q : I want to add a node to the network\n A : To enter "
+				JOptionPane.showMessageDialog(null, "Using of the program\n\n Q : How do I add an activity into the network?\n A : To enter "
 						+ "a Node please enter the the nodes name in the activity name field\n enter the duration into the duration field."
 						+ "plese note duration must be an integer, and add any dependencies of the\n node as a space separated list\n\nQ : How do I"
 						+ " quit the program?\nA :  To quit the program simply hit the Quit button\n\nQ : How can I restart the Network?\n A :  "
 						+ "To restart the network just hit the reset network."
 						+ " it will clear the network so that you can start from scratch\n\n"
-						+ "Q : can I enter more than 1 activity at a time?\nA : No you can only enter 1 activity at a time" 
+						+ "Q : Can I enter more than 1 activity at a time?\nA : No you can only enter 1 activity at a time" 
 			);
 			}
 		});
@@ -129,13 +130,23 @@ public class InputFrame {
 		enterButton.addActionListener(new ActionListener() {
 			/*once the user has entered the data in the provided fields. retrieve it and clear the fields*/
 			public void actionPerformed(ActionEvent e) {
+				activityLabel.setForeground(Color.BLACK);
+				durationLabel.setForeground(Color.BLACK);
 				String activity = ActivityField.getText();
 				String duration = DurationField.getText();
 				String depend = DependenciesField.getText();
 				String[] result = depend.trim().split(" ");//trims the string down and will store it in an array
 				// not sure how to do dependencies
-				if(isNumeric(duration) == false) {
+				if(activity.isEmpty()== true || duration.isEmpty()) {
+					JOptionPane.showMessageDialog(null, "please enter missing info");
+					if(activity.isEmpty() == true)
+						activityLabel.setForeground(Color.red);
+					if(duration.isEmpty() == true)
+						durationLabel.setForeground(Color.red);
+				}
+				else if(isNumeric(duration) == false) {
 					JOptionPane.showMessageDialog(null, "Please Enter an Integer");
+					durationLabel.setForeground(Color.red);
 				}
 				//clear the textFields
 				ActivityField.setText(null);
