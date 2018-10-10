@@ -17,11 +17,11 @@ public class OutputFrame {
 	/**
 	 * Launch the application.
 	 */
-	public void newScreen(String criticalPath) {
+	public void newScreen(String criticalPath, int endTime) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OutputFrame window = new OutputFrame(criticalPath);
+					OutputFrame window = new OutputFrame(criticalPath, endTime);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,14 +33,14 @@ public class OutputFrame {
 	/**
 	 * Create the application.
 	 */
-	public OutputFrame(String criticalPath) {
-		initialize(criticalPath);
+	public OutputFrame(String criticalPath, int endTime) {
+		initialize(criticalPath, endTime);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(String criticalPath) {
+	private void initialize(String criticalPath, int endTime) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -50,7 +50,7 @@ public class OutputFrame {
 		textField.setBounds(12, 72, 408, 168);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
-		textField.setText(criticalPath);
+		textField.setText("Total Time: " + endTime + "\t" + criticalPath);
 		
 		JLabel criticalPathLabel = new JLabel("critical path");
 		criticalPathLabel.setForeground(Color.RED);

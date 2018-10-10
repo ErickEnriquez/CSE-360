@@ -95,10 +95,11 @@ public class InputFrame {
 				activityList.insertionSort(activityList.masterList);
 				activityList.masterList.get(activityList.masterList.size() - 1).setCriticalPath(CriticalPath);
 				CriticalPath.add(activityList.masterList.get(activityList.masterList.size() - 1));
+				int endTime = activityList.masterList.get(activityList.masterList.size() - 1).endTime;
 				activityList.insertionSort(CriticalPath);
 				String criticalPathOutput = activityList.masterList.get(0).printCriticalPath(CriticalPath);
-					OutputFrame out = new OutputFrame(criticalPathOutput);
-					out.newScreen(criticalPathOutput);
+					OutputFrame out = new OutputFrame(criticalPathOutput, endTime);
+					out.newScreen(criticalPathOutput, endTime);
 			}
 		});
 		
@@ -108,6 +109,11 @@ public class InputFrame {
 		JButton restartButton = new JButton("Restart");
 		restartButton.setBounds(368, 155, 186, 65);
 		frame.getContentPane().add(restartButton);
+		restartButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				activityList.masterList.clear();
+			}
+		});
 		
 		JButton quitButton = new JButton("Quit");
 		quitButton.addActionListener(new ActionListener() {
