@@ -152,11 +152,11 @@ public class InputFrame {
 				if(duration.isEmpty() ==  true || activity.isEmpty() == true) {
 					JOptionPane.showMessageDialog(null, "please enter required info");
 					if(duration.isEmpty() == true){
-						durationLabel.setForeground(Color.RED);
+						durationLabel.setForeground(Color.BLUE);
 					}
 				}
 					if(activity.isEmpty() == true) {
-						activityLabel.setForeground(Color.RED);
+						activityLabel.setForeground(Color.RED);SS
 					}
 				if(isNumeric(duration) == false) {
 					JOptionPane.showMessageDialog(null, "Please Enter an Integer");
