@@ -1,5 +1,5 @@
-import java.awt.Color;
 import java.awt.EventQueue;
+import java.util.*;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,6 +15,7 @@ public class InputFrame {
 	private JTextField ActivityField;
 	private JTextField DurationField;
 	private JTextField DependenciesField;
+	PertList activityList = new PertList();
 
 	/**
 	 * Launch the application.
@@ -79,8 +80,33 @@ public class InputFrame {
 		proccessButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//one the user enters in all of the data we will open the output frame and display results here
-				OutputFrame o = new OutputFrame();//make a new object of type outputFrame 
-				o.newScreen();// open a new frame by calling it's initialize button
+				//OutputFrame out = new OutputFrame();//make an object of type OutputFrame()
+				//out.newScreen();//open a new the output window
+				
+				//testing with console output
+				
+				ArrayList<PertNode> CriticalPath = new ArrayList<PertNode>();
+				for (int i = 0; i < activityList.masterList.size(); i++)
+				{
+					activityList.masterList.get(i).setDependency(activityList);
+				}
+				for (int i = 0; i < activityList.masterList.size(); i++)
+				{
+					activityList.masterList.get(i).setEndTime();
+				}
+				activityList.insertionSort(activityList.masterList);
+				activityList.masterList.get(activityList.masterList.size() - 1).setCriticalPath(CriticalPath);
+				CriticalPath.add(activityList.masterList.get(activityList.masterList.size() - 1));
+				activityList.insertionSort(CriticalPath);
+				for (int i = 0; i < activityList.masterList.size(); i++)
+				{
+					activityList.masterList.get(i).printDependencies();
+				}
+				System.out.print("Critical Path:");
+				for (int i = 0; i < CriticalPath.size(); i++)
+				{
+					System.out.print(" " + CriticalPath.get(i).Node + " ");
+				}
 			}
 		});
 		proccessButton.setBounds(368, 47, 186, 65);
@@ -101,21 +127,6 @@ public class InputFrame {
 		frame.getContentPane().add(quitButton);
 		
 		JButton helpButton = new JButton("Help");
-		helpButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//if the user hit the help button open a dialog box that helps with some of the common functions of the program
-				JOptionPane.showMessageDialog(null, "Using of the program\n\n Q : How do I add an activity into the network?\n A : To enter "
-						+ "an activity please enter the the activity's name in the activity name field,\n enter the duration into the duration field,"
-						+ "(please note duration must be an integer), and add any dependencies of the\n node as a space separated list,then click enter and "
-						+ " it will add the activity into the network\n\nQ : How do I"
-						+ " quit the program?\nA :  To quit the program simply hit the Quit button\n\nQ : How can I restart the Network?\n A :  "
-						+ "To restart the network just hit the reset network."
-						+ " it will clear the network so that you can start from scratch\n\n"
-						+ "Q : Can I enter more than 1 activity at a time?\nA : No you can only enter 1 activity at a time"
-						+"\n\nQ : What does the proccess button do?\nA : The process button takes the network created and outputs the critical path in a new tab"
-			);
-			}
-		});
 		helpButton.setBounds(457, 400, 97, 25);
 		frame.getContentPane().add(helpButton);
 		
@@ -132,24 +143,32 @@ public class InputFrame {
 		enterButton.addActionListener(new ActionListener() {
 			/*once the user has entered the data in the provided fields. retrieve it and clear the fields*/
 			public void actionPerformed(ActionEvent e) {
-				activityLabel.setForeground(Color.BLACK);//reset the text if it was changed
-				durationLabel.setForeground(Color.BLACK);//reset the label color if it was changed
+				int intDuration = 0;
+				String[] result;
+				String depend;
 				String activity = ActivityField.getText();
 				String duration = DurationField.getText();
-				String depend = DependenciesField.getText();
-				String[] result = depend.trim().split(" ");//trims the string down and will store it in an array
-				// not sure how to do dependencies
-				if(activity.isEmpty()== true || duration.isEmpty()) {
-					JOptionPane.showMessageDialog(null, "please enter missing info");
-					if(activity.isEmpty() == true)
-						activityLabel.setForeground(Color.red);
-					if(duration.isEmpty() == true)
-						durationLabel.setForeground(Color.red);
-				}
-				else if(isNumeric(duration) == false) {
+				if(isNumeric(duration) == false) {
 					JOptionPane.showMessageDialog(null, "Please Enter an Integer");
-					durationLabel.setForeground(Color.red);
 				}
+				else 
+				{
+					intDuration = Integer.parseInt(duration);
+				}
+				//we need to resolve the edge case where dependency field is empty
+				//to avoid a null pointer access exception
+				if(DependenciesField.getText().isEmpty())
+				{
+					result = new String[0];
+				}
+				else 
+				{
+					depend = DependenciesField.getText();
+					result = depend.trim().split(" ");//trims the string down and will store it in an array
+				// not sure how to do dependencies
+				}
+				PertNode newNode = new PertNode(activity, intDuration, result);
+				activityList.updateList(newNode);
 				//clear the textFields
 				ActivityField.setText(null);
 				DurationField.setText(null);
