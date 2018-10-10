@@ -145,7 +145,7 @@ public class InputFrame {
 			public void actionPerformed(ActionEvent e) {
 				int intDuration = 0;
 				durationLabel.setForeground(Color.BLACK);
-				durationLabel.setForeground(Color.BLACK);
+				activityLabel.setForeground(Color.BLACK);
 				String[] result;
 				String depend;
 				String activity = ActivityField.getText();
