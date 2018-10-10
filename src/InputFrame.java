@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.util.*;
 
@@ -80,11 +81,8 @@ public class InputFrame {
 		proccessButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//one the user enters in all of the data we will open the output frame and display results here
-				//OutputFrame out = new OutputFrame();//make an object of type OutputFrame()
-				//out.newScreen();//open a new the output window
 				
 				//testing with console output
-				
 				ArrayList<PertNode> CriticalPath = new ArrayList<PertNode>();
 				for (int i = 0; i < activityList.masterList.size(); i++)
 				{
@@ -106,6 +104,8 @@ public class InputFrame {
 				for (int i = 0; i < CriticalPath.size(); i++)
 				{
 					System.out.print(" " + CriticalPath.get(i).Node + " ");
+					OutputFrame out = new OutputFrame();
+					out.newScreen();
 				}
 			}
 		});
@@ -144,12 +144,24 @@ public class InputFrame {
 			/*once the user has entered the data in the provided fields. retrieve it and clear the fields*/
 			public void actionPerformed(ActionEvent e) {
 				int intDuration = 0;
+				durationLabel.setForeground(Color.BLACK);
+				durationLabel.setForeground(Color.BLACK);
 				String[] result;
 				String depend;
 				String activity = ActivityField.getText();
 				String duration = DurationField.getText();
+				if(duration.isEmpty() ==  true || activity.isEmpty() == true) {
+					JOptionPane.showMessageDialog(null, "please enter required info");
+					if(duration.isEmpty() == true){
+						durationLabel.setForeground(Color.RED);
+					}
+				}
+					if(activity.isEmpty() == true) {
+						activityLabel.setForeground(Color.RED);
+					}
 				if(isNumeric(duration) == false) {
 					JOptionPane.showMessageDialog(null, "Please Enter an Integer");
+					activityLabel.setForeground(Color.RED);
 				}
 				else 
 				{
