@@ -129,9 +129,10 @@ public class PertNode
 			determineCriticalPath(Largest, CriticalPath);
 		}
 	}
-	void printDependencies() // this function prints the dependencies to std output.
+	String printDependencies() // this function prints the dependencies to std output.
 	{
-		System.out.println("Node: " + this.Node + " End Time: " + this.endTime);
+		String Output = "Node: " + this.Node + " End Time: " + this.endTime;
+		return Output;
 	}
 	boolean compareCriticalPath(PertNode Node, ArrayList<PertNode> CriticalPath)
 	{
@@ -143,6 +144,15 @@ public class PertNode
 			}
 		}
 		return true;
+	}
+	String printCriticalPath(ArrayList<PertNode> CriticalPath)
+	{
+		String Output = "Critical Path:";
+		for(int i = 0; i < CriticalPath.size(); i++)
+		{
+			Output += " " + CriticalPath.get(i).Node + " ";
+		}
+		return Output;
 	}
 }
 

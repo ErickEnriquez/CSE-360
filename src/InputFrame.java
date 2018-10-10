@@ -81,7 +81,7 @@ public class InputFrame {
 		proccessButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//one the user enters in all of the data we will open the output frame and display results here
-				
+				String Dependencies = "";
 				//testing with console output
 				ArrayList<PertNode> CriticalPath = new ArrayList<PertNode>();
 				for (int i = 0; i < activityList.masterList.size(); i++)
@@ -96,19 +96,12 @@ public class InputFrame {
 				activityList.masterList.get(activityList.masterList.size() - 1).setCriticalPath(CriticalPath);
 				CriticalPath.add(activityList.masterList.get(activityList.masterList.size() - 1));
 				activityList.insertionSort(CriticalPath);
-				for (int i = 0; i < activityList.masterList.size(); i++)
-				{
-					activityList.masterList.get(i).printDependencies();
-				}
-				System.out.print("Critical Path:");
-				for (int i = 0; i < CriticalPath.size(); i++)
-				{
-					System.out.print(" " + CriticalPath.get(i).Node + " ");
-					OutputFrame out = new OutputFrame();
-					out.newScreen();
-				}
+				String criticalPathOutput = activityList.masterList.get(0).printCriticalPath(CriticalPath);
+					OutputFrame out = new OutputFrame(criticalPathOutput);
+					out.newScreen(criticalPathOutput);
 			}
 		});
+		
 		proccessButton.setBounds(368, 47, 186, 65);
 		frame.getContentPane().add(proccessButton);
 		
