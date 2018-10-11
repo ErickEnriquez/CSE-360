@@ -129,6 +129,29 @@ public class PertNode
 			determineCriticalPath(Largest, CriticalPath);
 		}
 	}
+	void determinePaths(PertNode Node, ArrayList<ArrayList<PertNode>> masterList, ArrayList<PertNode> path)
+	{
+		path.add(Node);
+		
+		if(Node.Dependencies.size() == 0)
+		{
+			//traversal done.
+			//path.add(Node);
+			//ArrayList<PertNode> newerPath = new ArrayList<PertNode>();
+			masterList.add(path);
+			return;
+		}
+		else
+		{
+			for (int i = 0; i < Node.Dependencies.size(); i++)
+			{
+				ArrayList<PertNode> newPath = new ArrayList<PertNode>();
+				newPath.addAll(path);
+				//newPath.add(Node.Dependencies.get(i));
+				determinePaths(Node.Dependencies.get(i), masterList, newPath);
+			}
+		}
+	}
 	String printDependencies() // this function prints the dependencies to std output.
 	{
 		String Output = "Node: " + this.Node + " End Time: " + this.endTime;

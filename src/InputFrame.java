@@ -84,6 +84,9 @@ public class InputFrame {
 				String Dependencies = "";
 				//testing with console output
 				ArrayList<PertNode> CriticalPath = new ArrayList<PertNode>();
+				ArrayList<ArrayList<PertNode>> godList = new ArrayList<ArrayList<PertNode>>();
+				ArrayList<PertNode> normalPath = new ArrayList<PertNode>();
+				
 				for (int i = 0; i < activityList.masterList.size(); i++)
 				{
 					boolean flag = activityList.masterList.get(i).setDependency(activityList);
@@ -100,6 +103,20 @@ public class InputFrame {
 				activityList.insertionSort(activityList.masterList);
 				activityList.masterList.get(activityList.masterList.size() - 1).setCriticalPath(CriticalPath);
 				CriticalPath.add(activityList.masterList.get(activityList.masterList.size() - 1));
+				
+				activityList.masterList.get(activityList.masterList.size() - 1).determinePaths(activityList.masterList.get(activityList.masterList.size() - 1), godList, normalPath);
+				for(int i = 0; i < godList.size(); i++)
+				{
+					activityList.insertionSort(godList.get(i));
+				}
+				for(int i = 0; i < godList.size(); i++)
+				{
+					System.out.println();
+					for(int j = 0; j < godList.get(i).size(); j++)
+					{
+						System.out.print(godList.get(i).get(j).Node + " ");
+					}
+				}
 				int endTime = activityList.masterList.get(activityList.masterList.size() - 1).endTime;
 				activityList.insertionSort(CriticalPath);
 				String criticalPathOutput = activityList.masterList.get(0).printCriticalPath(CriticalPath);
