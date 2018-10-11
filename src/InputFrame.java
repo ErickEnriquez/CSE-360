@@ -87,6 +87,11 @@ public class InputFrame {
 				for (int i = 0; i < activityList.masterList.size(); i++)
 				{
 					activityList.masterList.get(i).setDependency(activityList);
+					/*if(flag == false)
+					{
+						JOptionPane.showMessageDialog(null, "Error: one of the dependencies you entered did not have a corresponding node. Please input the corresponding Node");
+						return;
+					}*/
 				}
 				for (int i = 0; i < activityList.masterList.size(); i++)
 				{
@@ -156,7 +161,7 @@ public class InputFrame {
 					}
 				}
 					if(activity.isEmpty() == true) {
-						activityLabel.setForeground(Color.RED);SS
+						activityLabel.setForeground(Color.RED);
 					}
 				if(isNumeric(duration) == false) {
 					JOptionPane.showMessageDialog(null, "Please Enter an Integer");
