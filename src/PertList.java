@@ -6,7 +6,7 @@
  */
 import java.util.*;
 
-public class PertList 
+public class PertList
 {
 	ArrayList<PertNode> masterList;
 	PertList() //default constructor

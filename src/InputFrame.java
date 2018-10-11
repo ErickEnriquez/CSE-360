@@ -86,12 +86,12 @@ public class InputFrame {
 				ArrayList<PertNode> CriticalPath = new ArrayList<PertNode>();
 				for (int i = 0; i < activityList.masterList.size(); i++)
 				{
-					activityList.masterList.get(i).setDependency(activityList);
-					/*if(flag == false)
+					boolean flag = activityList.masterList.get(i).setDependency(activityList);
+					if(flag == false)
 					{
 						JOptionPane.showMessageDialog(null, "Error: one of the dependencies you entered did not have a corresponding node. Please input the corresponding Node");
 						return;
-					}*/
+					}
 				}
 				for (int i = 0; i < activityList.masterList.size(); i++)
 				{
@@ -157,7 +157,7 @@ public class InputFrame {
 				if(duration.isEmpty() ==  true || activity.isEmpty() == true) {
 					JOptionPane.showMessageDialog(null, "please enter required info");
 					if(duration.isEmpty() == true){
-						durationLabel.setForeground(Color.BLUE);
+						durationLabel.setForeground(Color.RED);
 					}
 				}
 					if(activity.isEmpty() == true) {
