@@ -131,6 +131,14 @@ public class InputFrame {
 		frame.getContentPane().add(quitButton);
 		
 		JButton helpButton = new JButton("Help");
+		helpButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null, "Using the program\n\nQ: how do I enter input\n A:you enter the name in the activity name"
+						+ "you enter the duration as an integer in the\n duration field, and you enter the dependecies as a spaced list\n\nQ:How do I restart?"
+						+ "\nA: to restart simply press the enter button and the network will be cleared out\n\n Q: what does the proccess button do?\nA:The proccess button opens a new tab where the paths are listed"
+						+ "in descending order");
+			}
+		});
 		helpButton.setBounds(457, 400, 97, 25);
 		frame.getContentPane().add(helpButton);
 		
