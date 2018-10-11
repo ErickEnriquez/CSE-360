@@ -8,11 +8,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import javax.swing.JTextPane;
 
 public class OutputFrame {
 
 	private JFrame frame;
-	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -46,13 +46,8 @@ public class OutputFrame {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(12, 72, 408, 168);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-		textField.setText("Total Time: " + endTime + "\t" + criticalPath);
 		
-		JLabel criticalPathLabel = new JLabel("critical path");
+		JLabel criticalPathLabel = new JLabel("All Paths");
 		criticalPathLabel.setForeground(Color.RED);
 		criticalPathLabel.setBounds(166, 0, 109, 59);
 		frame.getContentPane().add(criticalPathLabel);
@@ -65,5 +60,11 @@ public class OutputFrame {
 		});
 		helpButton.setBounds(293, 34, 97, 25);
 		frame.getContentPane().add(helpButton);
+		
+		JTextPane textPane = new JTextPane();
+		textPane.setBounds(29, 66, 361, 174);
+		frame.getContentPane().add(textPane);
+		
+		
 	}
 }

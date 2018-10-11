@@ -60,20 +60,20 @@ public class InputFrame {
 		ActivityField.setColumns(10);
 		
 		JLabel durationLabel = new JLabel("Duration");
-		durationLabel.setBounds(43, 141, 56, 16);
+		durationLabel.setBounds(43, 245, 56, 16);
 		frame.getContentPane().add(durationLabel);
 		
 		DurationField = new JTextField();
-		DurationField.setBounds(43, 164, 195, 46);
+		DurationField.setBounds(40, 274, 195, 46);
 		frame.getContentPane().add(DurationField);
 		DurationField.setColumns(10);
 		
 		JLabel dependenciesLabel = new JLabel("Dependecies");
-		dependenciesLabel.setBounds(43, 253, 116, 16);
+		dependenciesLabel.setBounds(43, 145, 116, 16);
 		frame.getContentPane().add(dependenciesLabel);
 		
 		DependenciesField = new JTextField();
-		DependenciesField.setBounds(43, 279, 195, 46);
+		DependenciesField.setBounds(40, 174, 195, 46);
 		frame.getContentPane().add(DependenciesField);
 		DependenciesField.setColumns(10);
 		
