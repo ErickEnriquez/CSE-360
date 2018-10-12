@@ -2,6 +2,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
@@ -12,16 +13,16 @@ import java.awt.Color;
 public class OutputFrame {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextPane textField;
 
 	/**
 	 * Launch the application.
 	 */
-	public void newScreen(String criticalPath, int endTime) {
+	public void newScreen(String list, String criticalPath, int endTime) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					OutputFrame window = new OutputFrame(criticalPath, endTime);
+					OutputFrame window = new OutputFrame(list, criticalPath, endTime);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,24 +34,24 @@ public class OutputFrame {
 	/**
 	 * Create the application.
 	 */
-	public OutputFrame(String criticalPath, int endTime) {
-		initialize(criticalPath, endTime);
+	public OutputFrame(String list, String criticalPath, int endTime) {
+		initialize(list, criticalPath, endTime);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(String criticalPath, int endTime) {
+	private void initialize(String list, String criticalPath, int endTime) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		textField = new JTextField();
+		textField = new JTextPane();
 		textField.setBounds(12, 72, 408, 168);
 		frame.getContentPane().add(textField);
-		textField.setColumns(10);
-		textField.setText("Total Time: " + endTime + "\t" + criticalPath);
+		//textField.setColumns(10);
+		textField.setText("Total Time: " + endTime + "\n" + criticalPath + "\n" + list);
 		
 		JLabel criticalPathLabel = new JLabel("critical path");
 		criticalPathLabel.setForeground(Color.RED);
