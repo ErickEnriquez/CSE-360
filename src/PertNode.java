@@ -116,8 +116,17 @@ public class PertNode
 			int largestTime = 0;
 			for (int i = 0; i < Node.Dependencies.size(); i++)
 			{
-				if(largestTime < Node.Dependencies.get(i).endTime)
+				/*if(largestTime < Node.Dependencies.get(i).endTime)
 				{
+					
+				}*/
+				if (Node.Dependencies.get(i).endTime == largestTime)
+				{
+					
+				}
+				else if (Node.Dependencies.get(i).endTime > largestTime)
+				{
+					//from top if statement
 					largestTime = Node.Dependencies.get(i).endTime;
 					Largest = Node.Dependencies.get(i);
 				}
@@ -143,7 +152,7 @@ public class PertNode
 		}
 		else
 		{
-			for (int i = 0; i < Node.Dependencies.size(); i++)
+			for (int i = Node.Dependencies.size() - 1; i >= 0; i--)
 			{
 				ArrayList<PertNode> newPath = new ArrayList<PertNode>();
 				newPath.addAll(path);
