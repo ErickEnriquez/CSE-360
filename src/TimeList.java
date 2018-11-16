@@ -5,7 +5,7 @@ public class TimeList
 	int time;
 	ArrayList<ArrayList<PertNode>> bigList;
 	ArrayList<PertNode> smallList;
-
+//this comment counts as a change
 	void insertionSortTimeList(ArrayList<TimeList> array, String order)
 	{
 		if(Objects.equals(order, "i"))
