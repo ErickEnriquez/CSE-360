@@ -17,18 +17,35 @@ public class PertList
 	{
 		this.masterList.add(Node);
 	}
-	void insertionSort(ArrayList<PertNode> array)
+	void insertionSort(ArrayList<PertNode> array, String order)
 	{
-		for (int j = 1; j < array.size(); j++)
+		if(Objects.equals(order, "i"))
 		{
-			PertNode Key = array.get(j);
-			int i = j - 1;
-			while(i > -1 && array.get(i).endTime > Key.endTime)
+			for (int j = 1; j < array.size(); j++)
 			{
-				array.set(i + 1, array.get(i));
-				i = i - 1;
+				PertNode Key = array.get(j);
+				int i = j - 1;
+				while(i > -1 && array.get(i).endTime > Key.endTime)
+				{
+					array.set(i + 1, array.get(i));
+					i = i - 1;
+				}
+				array.set(i + 1, Key);
 			}
-			array.set(i + 1, Key);
+		}
+		else
+		{
+			for (int j = 1; j < array.size(); j++)
+			{
+				PertNode Key = array.get(j);
+				int i = j - 1;
+				while(i > -1 && array.get(i).endTime < Key.endTime)
+				{
+					array.set(i + 1, array.get(i));
+					i = i - 1;
+				}
+				array.set(i + 1, Key);
+			}
 		}
 	}
 }

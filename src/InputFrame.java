@@ -84,6 +84,9 @@ public class InputFrame {
 				String Dependencies = "";
 				//testing with console output
 				ArrayList<PertNode> CriticalPath = new ArrayList<PertNode>();
+				ArrayList<ArrayList<PertNode>> godList = new ArrayList<ArrayList<PertNode>>();
+				ArrayList<PertNode> normalPath = new ArrayList<PertNode>();
+				
 				for (int i = 0; i < activityList.masterList.size(); i++)
 				{
 					boolean flag = activityList.masterList.get(i).setDependency(activityList);
@@ -97,14 +100,43 @@ public class InputFrame {
 				{
 					activityList.masterList.get(i).setEndTime();
 				}
-				activityList.insertionSort(activityList.masterList);
+				activityList.insertionSort(activityList.masterList, "i");
 				activityList.masterList.get(activityList.masterList.size() - 1).setCriticalPath(CriticalPath);
 				CriticalPath.add(activityList.masterList.get(activityList.masterList.size() - 1));
+				
+				activityList.masterList.get(activityList.masterList.size() - 1).determinePaths(activityList.masterList.get(activityList.masterList.size() - 1), godList, normalPath);
+				for(int i = 0; i < godList.size(); i++)
+				{
+					activityList.insertionSort(godList.get(i), "i");
+				}
+				String list = "";
+				int[] totalTime = new int[godList.size()];
+				for(int i = 0; i < godList.size(); i++)
+				{
+					totalTime[i] = 0;
+				}
+				for(int i = 0; i < godList.size(); i++)
+				{
+					for(int j = 0; j < godList.get(i).size(); j++)
+					{
+						totalTime[i] += godList.get(i).get(j).Duration;
+					}
+				}
+				for(int i = 0; i < godList.size(); i++)
+				{
+					for(int j = 0; j < godList.get(i).size(); j++)
+					{
+						list += godList.get(i).get(j).Node + " ";
+					}
+					list += "Total Time: " + totalTime[i] + "\n";
+				}
+				
+				
 				int endTime = activityList.masterList.get(activityList.masterList.size() - 1).endTime;
-				activityList.insertionSort(CriticalPath);
+				activityList.insertionSort(CriticalPath, "i");
 				String criticalPathOutput = activityList.masterList.get(0).printCriticalPath(CriticalPath);
-					OutputFrame out = new OutputFrame(criticalPathOutput, endTime);
-					out.newScreen(criticalPathOutput, endTime);
+					OutputFrame out = new OutputFrame(list, criticalPathOutput, endTime);
+					out.newScreen(list, criticalPathOutput, endTime);
 			}
 		});
 		

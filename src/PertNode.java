@@ -116,8 +116,17 @@ public class PertNode
 			int largestTime = 0;
 			for (int i = 0; i < Node.Dependencies.size(); i++)
 			{
-				if(largestTime < Node.Dependencies.get(i).endTime)
+				/*if(largestTime < Node.Dependencies.get(i).endTime)
 				{
+					
+				}*/
+				if (Node.Dependencies.get(i).endTime == largestTime)
+				{
+					
+				}
+				else if (Node.Dependencies.get(i).endTime > largestTime)
+				{
+					//from top if statement
 					largestTime = Node.Dependencies.get(i).endTime;
 					Largest = Node.Dependencies.get(i);
 				}
@@ -127,6 +136,29 @@ public class PertNode
 				CriticalPath.add(Largest);
 			}
 			determineCriticalPath(Largest, CriticalPath);
+		}
+	}
+	void determinePaths(PertNode Node, ArrayList<ArrayList<PertNode>> masterList, ArrayList<PertNode> path)
+	{
+		path.add(Node);
+		
+		if(Node.Dependencies.size() == 0)
+		{
+			//traversal done.
+			//path.add(Node);
+			//ArrayList<PertNode> newerPath = new ArrayList<PertNode>();
+			masterList.add(path);
+			return;
+		}
+		else
+		{
+			for (int i = Node.Dependencies.size() - 1; i >= 0; i--)
+			{
+				ArrayList<PertNode> newPath = new ArrayList<PertNode>();
+				newPath.addAll(path);
+				//newPath.add(Node.Dependencies.get(i));
+				determinePaths(Node.Dependencies.get(i), masterList, newPath);
+			}
 		}
 	}
 	String printDependencies() // this function prints the dependencies to std output.
