@@ -235,13 +235,13 @@ public class InputFrame {
 		enterButton.setBounds(40, 354, 175, 57);
 		frame.getContentPane().add(enterButton);
 		
-		JRadioButton critPathOnlyButton = new JRadioButton("New radio button");
+		JRadioButton critPathOnlyButton = new JRadioButton("Display Critical Path Only");
 		critPathOnlyButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
 			}
 		});
-		critPathOnlyButton.setBounds(277, 370, 127, 25);
+		critPathOnlyButton.setBounds(223, 370, 213, 25);
 		frame.getContentPane().add(critPathOnlyButton);
 		
 	}

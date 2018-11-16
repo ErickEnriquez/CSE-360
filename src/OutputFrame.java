@@ -45,7 +45,7 @@ public class OutputFrame {
 	private void initialize(String list, String criticalPath, int endTime) {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		textField = new JTextPane();
@@ -71,6 +71,14 @@ public class OutputFrame {
 		JTextPane textPane = new JTextPane();
 		textPane.setBounds(29, 66, 361, 174);
 		frame.getContentPane().add(textPane);
+		
+		JButton btnOutputToText = new JButton("Output to Text File");
+		btnOutputToText.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnOutputToText.setBounds(29, 34, 97, 25);
+		frame.getContentPane().add(btnOutputToText);
 		
 		
 	}
