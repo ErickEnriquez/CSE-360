@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
 
 public class InputFrame {
 
@@ -233,6 +234,15 @@ public class InputFrame {
 		});
 		enterButton.setBounds(40, 354, 175, 57);
 		frame.getContentPane().add(enterButton);
+		
+		JRadioButton critPathOnlyButton = new JRadioButton("New radio button");
+		critPathOnlyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		critPathOnlyButton.setBounds(277, 370, 127, 25);
+		frame.getContentPane().add(critPathOnlyButton);
 		
 	}
 	/**Trys to convert string to numerical value. returns false is string is not a number , returns true otherwise*/
