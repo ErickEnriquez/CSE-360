@@ -17,6 +17,7 @@ public class InputFrame {
 	private JTextField ActivityField;
 	private JTextField DurationField;
 	private JTextField DependenciesField;
+	public boolean toggle = false;
 	PertList activityList = new PertList();
 
 	/**
@@ -136,8 +137,17 @@ public class InputFrame {
 				int endTime = activityList.masterList.get(activityList.masterList.size() - 1).endTime;
 				activityList.insertionSort(CriticalPath, "i");
 				String criticalPathOutput = activityList.masterList.get(0).printCriticalPath(CriticalPath);
-					OutputFrame out = new OutputFrame(list, criticalPathOutput, endTime);
-					out.newScreen(list, criticalPathOutput, endTime);
+				if(toggle)
+				{
+					OutputFrame out = new OutputFrame("", criticalPathOutput, endTime);
+					out.newScreen("", criticalPathOutput, endTime);
+				}
+				else
+				{
+					OutputFrame out = new OutputFrame(list, "", endTime);
+					out.newScreen(list, "", endTime);
+				}
+				//String criticalPathOutput = activityList.masterList.get(0).printCriticalPath(CriticalPath);
 			}
 		});
 		
@@ -238,7 +248,12 @@ public class InputFrame {
 		JRadioButton critPathOnlyButton = new JRadioButton("Display Critical Path Only");
 		critPathOnlyButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
+				if(toggle)
+				{
+					toggle = false;
+				}
+				else
+					toggle = true;
 			}
 		});
 		critPathOnlyButton.setBounds(223, 370, 213, 25);
