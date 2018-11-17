@@ -132,8 +132,6 @@ public class InputFrame {
 					}
 					list += "Total Time: " + totalTime[i] + "\n";
 				}
-				
-				
 				int endTime = activityList.masterList.get(activityList.masterList.size() - 1).endTime;
 				activityList.insertionSort(CriticalPath, "i");
 				String criticalPathOutput = activityList.masterList.get(0).printCriticalPath(CriticalPath);

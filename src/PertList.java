@@ -15,6 +15,15 @@ public class PertList
 	}
 	void updateList(PertNode Node)
 	{
+		//traverse list first to find any intersections
+		for(int i = 0; i <  this.masterList.size(); i++)
+		{
+			if(Objects.equals(this.masterList.get(i).Node, Node.Node))
+			{
+				this.masterList.get(i).Duration = Node.Duration;
+				break;
+			}
+		}
 		this.masterList.add(Node);
 	}
 	void insertionSort(ArrayList<PertNode> array, String order)
