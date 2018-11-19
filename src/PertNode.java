@@ -7,17 +7,20 @@ public class PertNode
 	int Duration;
 	int endTime = -1;
 	String[] stringDependencies;
+	boolean isCritical = false;
 	
 	PertNode() // default constructor
 	{
 		this.Node = "empty";
 		this.Duration = 0;
+		this.isCritical = false;
 	}
 	PertNode(String Node, int Duration, String[] stringDependencies)
 	{
 		this.Node = Node;
 		this.Duration = Duration;
 		this.stringDependencies = stringDependencies;
+		this.isCritical = false;
 	}
 	int getDuration()
 	{
@@ -31,6 +34,10 @@ public class PertNode
 	{
 		return Dependencies;
 	}
+	boolean getCritical()
+	{
+		return this.isCritical;
+	}
 	void setDuration(int Duration)
 	{
 		this.Duration = Duration;
@@ -42,6 +49,10 @@ public class PertNode
 	void setStringDependencies(String[] Dependencies)
 	{
 		this.stringDependencies = Dependencies;
+	}
+	void setCritical()
+	{
+		this.isCritical = true;
 	}
 	//assuming beyond this point that the data entry has concluded and all nodes have been inserted into masterList;
 	//function that determines dependency nodes;
@@ -100,42 +111,105 @@ public class PertNode
 	{
 		this.endTime = determineEndTime(this);
 	}
-	void setCriticalPath(ArrayList<PertNode> CriticalPath)
+	/*void setCriticalPath(ArrayList<PertNode> CriticalPath)
 	{
 		determineCriticalPath(this, CriticalPath);
-	}
-	void determineCriticalPath(PertNode Node, ArrayList<PertNode> CriticalPath)
+	}*/
+	void markCriticalPath(PertNode Node)
 	{
 		if(Node.Dependencies.size() == 0)
 		{
+			//if we reach the start of the path
 			return;
 		}
 		else
 		{
+			//there are still nodes along the path in need of checking;
+			//Determine the largest path(s), starting with the first path
 			PertNode Largest = Node.Dependencies.get(0);
-			int largestTime = 0;
+			int LargestEndTime = Largest.endTime;
+			//loop to see if the node has the longest endTime
 			for (int i = 0; i < Node.Dependencies.size(); i++)
 			{
-				/*if(largestTime < Node.Dependencies.get(i).endTime)
+				if(Node.Dependencies.get(i).endTime > LargestEndTime)
 				{
-					
-				}*/
-				if (Node.Dependencies.get(i).endTime == largestTime)
-				{
-					
-				}
-				else if (Node.Dependencies.get(i).endTime > largestTime)
-				{
-					//from top if statement
-					largestTime = Node.Dependencies.get(i).endTime;
 					Largest = Node.Dependencies.get(i);
+					LargestEndTime = Largest.endTime;
 				}
 			}
-			if(compareCriticalPath(Largest, CriticalPath))
+			for(int i = 0; i < Node.Dependencies.size(); i++)
 			{
-				CriticalPath.add(Largest);
+				if(Node.Dependencies.get(i).endTime == LargestEndTime)
+			 	{
+					Node.Dependencies.get(i).setCritical();
+					if(Node.Dependencies.size() == 1)
+					{
+						Node.Dependencies.get(0).isCritical = true;
+					}
+					markCriticalPath(Node.Dependencies.get(i));
+				}
 			}
-			determineCriticalPath(Largest, CriticalPath);
+			
+		}
+	}
+	void determineCriticalPaths(PertNode Node, ArrayList<ArrayList<PertNode>> CriticalPaths, ArrayList<PertNode> currentList)
+	{
+		if(Node.Dependencies.size() == 0)
+		{
+			if(Node.getCritical())
+			{
+				currentList.add(Node);
+			}
+			return;
+		}
+		else if(Node.Dependencies.size() == 1)
+		{
+			if(Node.getCritical())
+			{
+				currentList.add(Node);
+			}
+			determineCriticalPaths(Node.Dependencies.get(0), CriticalPaths, currentList);
+		}
+		else
+		{
+			if(Node.getCritical())
+			{
+				currentList.add(Node);
+			}
+			int count = 0;
+			for(int i = 0; i < Node.Dependencies.size(); i++)
+			{
+				if(Node.Dependencies.get(i).getCritical())
+				{
+					count++;
+				}
+			}
+			for(int i = 0; i < count; i++)
+			{
+				//We need to make sure the criticalPaths array has a spot for the new branches, this is handled in the following if statement
+				if(CriticalPaths.size() < count)
+				{
+					//we're taking the difference between the number of branches and the size of our list of critical paths in order to
+					//add the correct amount of paths to the list so we don't step out of bounds of the array when a new branch is discovered.
+					int difference = count - CriticalPaths.size();
+					for (int j = 0; j < difference; j++)
+					{
+						//here we copy the nodes from the reference currentList into newBranch, so we can maintain the path up to this branching
+						//for each new list in the CriticalPaths array.
+						ArrayList<PertNode> newBranch = new ArrayList<PertNode>();
+						newBranch.addAll(currentList);
+						CriticalPaths.add(newBranch);
+					}
+				}
+				for(int j = 0; j < Node.Dependencies.size(); j++)
+				{
+					if(Node.Dependencies.get(j).isCritical)
+					{
+						determineCriticalPaths(Node.Dependencies.get(j), CriticalPaths, CriticalPaths.get(i));
+						i++;
+					}
+				}
+			}
 		}
 	}
 	void determinePaths(PertNode Node, ArrayList<ArrayList<PertNode>> masterList, ArrayList<PertNode> path)
@@ -187,4 +261,37 @@ public class PertNode
 		return Output;
 	}
 }
-
+/*void determineCriticalPath(PertNode Node, ArrayList<PertNode> CriticalPath)
+{
+if(Node.Dependencies.size() == 0)
+{
+	return;
+}
+else
+{
+	PertNode Largest = Node.Dependencies.get(0);
+	int largestTime = 0;
+	for (int i = 0; i < Node.Dependencies.size(); i++)
+	{
+		/*if(largestTime < Node.Dependencies.get(i).endTime)
+		{
+			
+		}
+		if (Node.Dependencies.get(i).endTime == largestTime)
+		{
+			
+		}
+		else if (Node.Dependencies.get(i).endTime > largestTime)
+		{
+			//from top if statement
+			largestTime = Node.Dependencies.get(i).endTime;
+			Largest = Node.Dependencies.get(i);
+		}
+	}
+	if(compareCriticalPath(Largest, CriticalPath))
+	{
+		Critical Path.add(Largest);
+	}
+	determineCriticalPath(Largest, CriticalPath);
+}
+*/

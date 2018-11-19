@@ -85,7 +85,8 @@ public class InputFrame {
 				//one the user enters in all of the data we will open the output frame and display results here
 				String Dependencies = "";
 				//testing with console output
-				ArrayList<PertNode> CriticalPath = new ArrayList<PertNode>();
+				//ArrayList<PertNode> CriticalPath = new ArrayList<PertNode>();
+				
 				ArrayList<ArrayList<PertNode>> godList = new ArrayList<ArrayList<PertNode>>();
 				ArrayList<PertNode> normalPath = new ArrayList<PertNode>();
 				
@@ -103,8 +104,15 @@ public class InputFrame {
 					activityList.masterList.get(i).setEndTime();
 				}
 				activityList.insertionSort(activityList.masterList, "i");
-				activityList.masterList.get(activityList.masterList.size() - 1).setCriticalPath(CriticalPath);
-				CriticalPath.add(activityList.masterList.get(activityList.masterList.size() - 1));
+				ArrayList<ArrayList<PertNode>> CriticalPaths = new ArrayList<ArrayList<PertNode>>();
+				if(CriticalPaths.size() == 0)
+				{
+					CriticalPaths.add(new ArrayList<PertNode>());
+				}
+				//activityList.masterList.get(activityList.masterList.size() - 1).setCriticalPath(CriticalPath);
+				activityList.masterList.get(activityList.masterList.size() - 1).markCriticalPath(activityList.masterList.get(activityList.masterList.size() - 1));
+				CriticalPaths.get(0).add(activityList.masterList.get(activityList.masterList.size() - 1)); // add the final element
+				activityList.masterList.get(0).determineCriticalPaths(activityList.masterList.get(activityList.masterList.size() - 1), CriticalPaths, CriticalPaths.get(0));
 				
 				activityList.masterList.get(activityList.masterList.size() - 1).determinePaths(activityList.masterList.get(activityList.masterList.size() - 1), godList, normalPath);
 				for(int i = 0; i < godList.size(); i++)
@@ -133,8 +141,17 @@ public class InputFrame {
 					list += "Total Time: " + totalTime[i] + "\n";
 				}
 				int endTime = activityList.masterList.get(activityList.masterList.size() - 1).endTime;
-				activityList.insertionSort(CriticalPath, "i");
-				String criticalPathOutput = activityList.masterList.get(0).printCriticalPath(CriticalPath);
+				
+				for(int i = 0; i < CriticalPaths.size(); i++)
+				{
+					activityList.insertionSort(CriticalPaths.get(i), "i");
+				}
+				//String criticalPathOutput = activityList.masterList.get(0).printCriticalPath(CriticalPath);
+				String criticalPathOutput = "";
+				for(int i = 0; i < CriticalPaths.size(); i++)
+				{
+					criticalPathOutput += activityList.masterList.get(0).printCriticalPath(CriticalPaths.get(i));
+				}
 				if(toggle)
 				{
 					OutputFrame out = new OutputFrame("", criticalPathOutput, endTime);
@@ -144,6 +161,13 @@ public class InputFrame {
 				{
 					OutputFrame out = new OutputFrame(list, "", endTime);
 					out.newScreen(list, "", endTime);
+				}
+				for(int i = 0; i < CriticalPaths.size(); i++) 
+				{
+					for (int j = 0; j < CriticalPaths.get(i).size(); j++)
+					{
+						CriticalPaths.get(i).get(j).isCritical = false;
+					}
 				}
 				//String criticalPathOutput = activityList.masterList.get(0).printCriticalPath(CriticalPath);
 			}

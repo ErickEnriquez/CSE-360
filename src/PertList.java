@@ -21,7 +21,7 @@ public class PertList
 			if(Objects.equals(this.masterList.get(i).Node, Node.Node))
 			{
 				this.masterList.get(i).Duration = Node.Duration;
-				break;
+				return;
 			}
 		}
 		this.masterList.add(Node);
