@@ -1,5 +1,7 @@
 import java.util.*;
 
+import javax.swing.JOptionPane;
+
 public class PertNode
 {
 	ArrayList<PertNode> Dependencies;
@@ -98,11 +100,23 @@ public class PertNode
 
 			for(int i = 0; i < Node.Dependencies.size(); i++)
 			{
-				int dependencyEndTime = determineEndTime(Node.Dependencies.get(i));
-				if(largest < dependencyEndTime)
+				try 
 				{
-					largest = dependencyEndTime;
+					int dependencyEndTime = determineEndTime(Node.Dependencies.get(i));
+					if(largest < dependencyEndTime)
+					{
+						largest = dependencyEndTime;
+					}
 				}
+				catch (StackOverflowError e)
+				{
+					JOptionPane.showMessageDialog(null, "Error, self loop caught. Please restart and try again.");
+				}
+				finally
+				{
+					return -1;
+				}
+				
 			}
 			return largest + Node.Duration;
 		}
