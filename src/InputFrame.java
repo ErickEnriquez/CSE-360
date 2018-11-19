@@ -132,7 +132,7 @@ public class InputFrame {
 						totalTime[i] += godList.get(i).get(j).Duration;
 					}
 				}
-				for(int i = godList.size() - 1; i >= 0; i--)
+				for(int i =  0; i < godList.size(); i++)
 				{
 					for(int j = 0; j < godList.get(i).size(); j++)
 					{
