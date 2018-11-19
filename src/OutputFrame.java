@@ -74,7 +74,9 @@ public class OutputFrame {
 		
 		JButton btnOutputToText = new JButton("Output to Text File");
 		btnOutputToText.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) {//if the user hits the generate file button
+				CreateNewFile file = new CreateNewFile(list,criticalPath,endTime);//make an object of createnewFile
+				file.generateFileScreen(list, criticalPath, endTime);
 			}
 		});
 		btnOutputToText.setBounds(29, 34, 97, 25);

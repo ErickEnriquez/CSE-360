@@ -1,0 +1,7 @@
+output.txt
+2018/11/19 16:40:44
+Total Time: 15
+
+a c d Total Time: 15
+a b d Total Time: 12
+
