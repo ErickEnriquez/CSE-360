@@ -57,4 +57,35 @@ public class PertList
 			}
 		}
 	}
+	void inceptionSort(ArrayList<PertNode> array, String order)
+	{
+		if(Objects.equals(order, "i"))
+		{
+			for (int j = 1; j < array.size(); j++)
+			{
+				PertNode Key = array.get(j);
+				int i = j - 1;
+				while(i > -1 && array.get(i).Node.compareTo(Key.Node) > 0)
+				{
+					array.set(i + 1, array.get(i));
+					i = i - 1;
+				}
+				array.set(i + 1, Key);
+			}
+		}
+		else
+		{
+			for (int j = 1; j < array.size(); j++)
+			{
+				PertNode Key = array.get(j);
+				int i = j - 1;
+				while(i > -1 && array.get(i).Node.compareTo(Key.Node) < 0)
+				{
+					array.set(i + 1, array.get(i));
+					i = i - 1;
+				}
+				array.set(i + 1, Key);
+			}
+		}
+	}
 }

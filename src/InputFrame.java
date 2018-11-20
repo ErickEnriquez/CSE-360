@@ -18,6 +18,7 @@ public class InputFrame {
 	private JTextField DurationField;
 	private JTextField DependenciesField;
 	public boolean toggle = false;
+	public ArrayList<PertNode> NodesList = new ArrayList<PertNode>();
 	PertList activityList = new PertList();
 
 	/**
@@ -152,6 +153,12 @@ public class InputFrame {
 				{
 					criticalPathOutput += activityList.masterList.get(0).printCriticalPath(CriticalPaths.get(i));
 				}
+				activityList.insertionSort(NodesList, "i");
+				
+				for (int i = 0; i < NodesList.size(); i++)
+				{
+					list += NodesList.get(i).Node + "\tTime: " + NodesList.get(i).endTime + "\n";
+				}
 				if(toggle)
 				{
 					OutputFrame out = new OutputFrame("", criticalPathOutput, endTime);
@@ -257,11 +264,30 @@ public class InputFrame {
 				// not sure how to do dependencies
 				}
 				PertNode newNode = new PertNode(activity, intDuration, result);
-				activityList.updateList(newNode);
+				if(intersects(newNode))
+				{
+					NodesList.add(newNode);
+					activityList.updateList(newNode);
+				}
+				else
+				{
+					activityList.updateList(newNode);
+				}
 				//clear the textFields
 				ActivityField.setText(null);
 				DurationField.setText(null);
 				DependenciesField.setText(null);
+			}
+
+			private boolean intersects(PertNode newNode) {
+				for(int i = 0; i < NodesList.size(); i++)
+				{
+					if(Objects.equals(newNode.Node, NodesList.get(i).Node))
+					{
+						return false;
+					}
+				}
+				return true;
 			}
 		});
 		enterButton.setBounds(40, 354, 175, 57);
