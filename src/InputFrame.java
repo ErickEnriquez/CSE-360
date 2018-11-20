@@ -173,11 +173,11 @@ public class InputFrame {
 			}
 		});
 		
-		proccessButton.setBounds(368, 47, 186, 65);
+		proccessButton.setBounds(368, 47, 186, 46);
 		frame.getContentPane().add(proccessButton);
 		
 		JButton restartButton = new JButton("Restart");
-		restartButton.setBounds(368, 155, 186, 65);
+		restartButton.setBounds(368, 121, 186, 46);
 		frame.getContentPane().add(restartButton);
 		restartButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -192,7 +192,7 @@ public class InputFrame {
 				System.exit(0);
 			}
 		});
-		quitButton.setBounds(368, 270, 186, 65);
+		quitButton.setBounds(368, 192, 186, 46);
 		frame.getContentPane().add(quitButton);
 		
 		JButton helpButton = new JButton("Help");
@@ -278,8 +278,12 @@ public class InputFrame {
 					toggle = true;
 			}
 		});
-		critPathOnlyButton.setBounds(223, 370, 213, 25);
+		critPathOnlyButton.setBounds(368, 329, 213, 25);
 		frame.getContentPane().add(critPathOnlyButton);
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Update");
+		rdbtnNewRadioButton.setBounds(368, 285, 186, 25);
+		frame.getContentPane().add(rdbtnNewRadioButton);
 		
 	}
 	/**Trys to convert string to numerical value. returns false is string is not a number , returns true otherwise*/
